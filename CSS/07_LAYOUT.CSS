@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+
+body{
+
+    font-family: "Limelight";
+    background-color: #65BFB6;
+    color: #064004;
+    font-size: 2em;
+    margin: 30px;
+   
+    
+
+
+}
+
+.menuSuperior{
+
+    background-color: #9DBF21;
+    text-align: center;
+    margin: 0px 0px 30px 0px;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 10px #F2F2F2;
+    
+}
+.menuSuperiorBotao:hover{
+   background-color: #5e750b;
+   transition: 0.3s;
+}
+.menuSuperiorBotao{
+
+    background-color: #075904;
+    color: #fff;
+    text-decoration: none;
+    padding: 7px 14px ;
+    border-radius: 20px;
+    margin: 5px 20px;
+
+}
+
+
+.card{
+ text-align: center;    
+ background-color: #fff;
+ width: 275px;
+ border-radius: 30px;
+ padding: 7px 14px;
+
+
+}
+.cardBotao{
+    background-color: #65BFB6;
+    border: none;
+    width: 100%;
+    margin: 0;
+}
+/*ESPAÇAMENTOS */
+/*Margin é espaçamento por fora
+Padding é espaçamento por dentro

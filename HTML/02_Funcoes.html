@@ -1,0 +1,28 @@
+<h1>Funções!</h1>
+<p>Como criar funções em JavaScript e misturar com HTML</p>
+<button onclick="monstrarMensagem()">Mostrar mensagem</button>
+<button onclick="mostrarSalario()">Mostrar salário</button>
+
+<script>
+
+    function monstrarMensagem(){
+        let usuario = "Beatriz"
+    alert("Seja bem-vindo(a)! "+ usuario)
+    }
+
+    function mostrarSalario(){
+    let salario = 1500
+    let bonus = 200
+    let Inss = 30
+    let totalsalario = salario + bonus
+    let desconto = totalsalario - Inss
+
+    alert("O salario é R$"+salario + "e o bonus é R$"+bonus + "Porém será descontado R$"+Inss+ "de INSS n o total a receber R$" + totalsalario)
+
+    }
+    
+    function outraMensagem(){
+        
+    }
+
+</script>

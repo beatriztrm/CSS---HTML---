@@ -1,0 +1,93 @@
+<h1>Gerenciador de usuários</h1>
+<P>Encontre os usuários cadastrados, crie um novo, altere ou remova</P>
+
+<hr>
+
+<h2>Cadastrar</h2>
+
+<form onsubmit="salvar(event)">
+
+    <label>
+
+        Digite o nome:
+        <input placeholder="Digite seu nome" class="inputNome"/>
+
+
+    </label>
+<br><br>
+    <label>
+
+        Digite seu e-mail <input placeholder="Digite seu email" class="inputEmail" ></p>
+
+    </label>
+
+    <label>
+
+        Digite senha: <input  type="password"  placeholder="Digite sua senha" class="inputSenha"></p>
+
+    </label>
+    
+    
+    <br><br>
+    <button type="submit">Salvar</button>
+    <button type="reset">Cancelar</button>
+   
+</form>
+
+
+<hr>
+<h2>Listagem</h2>
+
+<table border class="tabelaListagem">
+    <tr>
+        
+        <td>Nome</td>
+        <td>Email</td>
+        <td>Senha</td>
+
+    </tr>
+</table>
+
+
+
+
+
+<!---------------------------------------------------------------------------->
+<!-----------------------------SCRIPT----------------------------------------->
+
+<script>
+
+    function salvar(e){
+
+        e.preventDefault()
+
+        let nome = document.querySelector(".inputNome").value
+        let email = document.querySelector(".inputEmail").value
+        let senha = document.querySelector(".InputSenha").value
+         
+
+        
+
+        let conteudo = `
+        <tr>
+        
+            <td>${nome}/td>
+            <td>${email}</td>
+            <td>${senha}</td>
+
+        </tr>
+        
+        `
+        document.querySelector(".tabelaListagem").innerHTML += conteudo
+    
+
+    }
+
+</script>
+
+<!---->
+<!--LABEL: rotulo - se clicar no texto ele envia para o campo ou seleciona, ele te dá acessabilidade (exemplo dos termos de uso)- -->
+<!--com o INPUT, voce so consegue escrever se clicar no campo-->
+<!--SIZE: Tamanho-->
+<!--Type Submit para o button salvar/enviar: serve para enviar-->
+<!--Type Reset para o botão cancelar-->

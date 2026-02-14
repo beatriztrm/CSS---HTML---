@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demonstração do Bootstrap</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="./08_desmonstracao.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- Menu lateral -->
+            <div class="col-3 menuLateral">
+
+                
+                <div class="text-center mt-5">
+                    <img class="my-4 rounded-circle" width="100" src="./imagens/download.jfif" />
+                    <h1 class="fs-4">Bea System</h1>
+                </div>
+
+                <div  class="list-group list-group-flush my-5">
+
+                    <a href="#" class="list-group-item list-group-item-action">Início</a>
+                    <a href="#" class="list-group-item list-group-item-action ">Usuários</a>
+                    <a href="#" class="list-group-item list-group-item-action">Produtos</a>
+
+                    </a>
+                </div>
+
+                <div class="text-center menuLateralPerfil">
+                    <img class="my-4 rounded-circle" width="100" src="./imagens/download.jfif" />
+
+                    <div class="btn-group dropend">
+                        <button class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                            Perfil
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"> Editar </a></li>
+                            <li><a class="dropdown-item" href="#"> Salvar </a></li>
+                            <!-- Dropdown menu links -->
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Conteúdo principal -->
+            <div class="col-9">
+
+                <!-- Introdução -->
+                <div>
+                    <h2>Gerenciamento de usuários</h2>
+                    <hr />
+                </div>
+
+                <!-- Pesquisa e filtro -->
+                <div class="row mt-5">
+
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <input class="form-control" placeholder="Pesquisar...">
+                            <button class="btn btn-outline-secondary">🔎</button>
+                        </div>
+
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-4">
+
+
+                        <select class="form-select">
+                            <option selected disabled>Filtros</option>
+                            <option value="1">Ativo</option>
+                            <option value="2">Inativos</option>
+
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Cadastro -->
+                <div class="text-end my-3">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> Novo
+                    </button>
+                </div>
+
+                <!-- Tabela de listagem -->
+                <div>
+
+                    <!-- ID, foto, nome -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">NOME</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>1</td>
+                                <td>Otto</td>
+
+
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>2</td>
+                                <td>Thornton</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>3</td>
+                                <td>Doe</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Modals -->
+        <div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title fs-5"> Cadastro de novo usuário </h3>
+                            <button class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">
+                                    Digite seu nome:
+                                    <input class="form-control">
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="form-label w-100">
+                                    Digite sua senha:
+                                    <input type="password" class="form-control">
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

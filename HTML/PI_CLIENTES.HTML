@@ -1,0 +1,109 @@
+<H1>Gerencimento de Clientes</H1>
+<!--CPF, NUMEROTELEFONE, NOMECOMPLETO, EMAIL, ENDEREÇO-->
+<hr>
+<h2>Cadastrar novo cliente</h2> <img width="500" src="./imagens/Cadastro clientes.jpg"/>
+<hr>
+
+<form onsubmit="salvar(event)">
+
+<label>
+
+         Nome completo:
+        <input required minlength="3"  class="inputNome"/>
+<label>
+
+<br><br>
+<label>
+
+        CPF:
+        <input required  placeholder="Digite CPF.." class="inputCpf"/>
+
+</label>
+
+<br><br>
+
+<label>
+
+        Endereço:
+        <input required  placeholder="Endereço.." class="inputEndereco" ></p>
+
+</label>
+
+<br>
+
+<label>
+        Telefone:
+        <input required  placeholder="Telefone com DDD.." class="inputTelefone" ></p>
+
+</label>
+
+<br>
+
+<label>
+
+        Digite seu e-mail:
+       <input placeholder="E-mail cliente.." class="inputEmail" ></p>
+
+</label>
+    
+    
+    <br><br>
+    <button type="submit">Salvar</button>
+    <button type="reset">Cancelar</button>
+   
+</form>
+
+
+<hr>
+<h2>Listagem</h2>
+
+<table border class="tabelaListagem">
+    <tr>
+        
+        <td>Nome</td>
+        <td>CPF</td>
+        <td>Endereço</td>
+        <td>Telefone</td>
+        <td>E-mail</td>
+
+    </tr>
+</table>
+
+
+</form>
+
+<!---------------------------------------------------------------------------->
+<!-----------------------------SCRIPT----------------------------------------->
+
+<script>
+
+    function salvar(e){
+
+        e.preventDefault()
+
+        let nome = document.querySelector(".inputNome").value
+        let cpf = document.querySelector(".inputCpf").value
+        let endereco = document.querySelector(".inputEndereco").value
+        let telefone = document.querySelector(".inputTelefone").value
+        let email = document.querySelector(".inputEmail").value
+
+         
+
+        let conteudo = `
+        <tr>
+       
+            <td>${nome}</td>
+            <td>${cpf}</td>
+            <td>${endereco}</td>
+            <td>${telefone}</td>
+            <td>${email}</td>
+
+        </tr>
+        
+        `
+        document.querySelector(".tabelaListagem").innerHTML += conteudo
+    
+
+    }
+
+</script>

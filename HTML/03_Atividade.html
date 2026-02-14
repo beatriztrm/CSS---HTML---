@@ -1,0 +1,58 @@
+<form >
+
+<p>Nome Completo</p>
+    <input minlength="3" ()required class="inputNome" /> 
+    
+    <p>E-mail</p>
+    <input type="email" ()required class="inputEmail" /> 
+
+    <p>Idade</p>
+    <input type="number"() required class="inputIdade" /> 
+
+    <p>Data de Nascimento</p>
+    <input type="month"() required class="datadeNascimento"/> 
+
+    <p>Telefone</p>
+
+    <input type="tel" ()required class="inputTelefone"/> 
+
+    <p>Estado</p>
+
+    <select id="Estado" name="Estado" class="inputEstado">
+  <option value="Outro">Outro</option>
+  <option value="São Paulo">São Paulo</option>
+  <option value="Alagoas">Alagoas</option>
+  <option value="Minas Gerais">Minas Gerais</option>
+  </select>
+
+  <br>
+<br>
+  <p>Observações</p>
+  <textarea name="Observações"></textarea>
+  <br><br>
+<button onclick="Cadastrar">Cadastrar</button>
+</form>
+
+
+<script>
+
+    function Cadastrar(){
+        let nome = document.querySelector(".inputNome").value 
+        let email = document.querySelector(".inputEmail").value
+        let Idade = document.querySelector(".inputIdade").value  
+        let datadeNascimento = document.querySelector(".inputdatadeNascimento").value  
+        let telefone = document.querySelector(".inputTelefone").value  
+        let estado = document.querySelector(".inputestado").value  
+        
+        alert("Seja bem Vindo(a)" + nome + "seu e-mail é:"+ email + idade + datadeNascimento + telefone + estado)
+
+
+       
+        
+
+     
+
+
+    } 
+
+</script>
