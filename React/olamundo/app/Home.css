@@ -1,0 +1,11 @@
+body{
+    background-color: rgb(16, 17, 17);
+    color: #fff;
+    font-family: arial;
+}
+
+.titulo{
+    color: blueviolet;
+    text-align: center;
+    font-size: 22px;
+}
