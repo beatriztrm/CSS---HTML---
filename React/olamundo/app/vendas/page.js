@@ -38,6 +38,22 @@ function Vendas() {
                     <td>Data</td>
                 </tr>
 
+                {
+                    listaVendas.length == 0 ?   
+                        <p>Carregando..</p>
+                    :    
+                        listaVendas.map(
+                            item => <tr>
+                                    <td> {item.id_usuario} </td>
+                                    <td> {item.id_livro} </td>
+                                    <td> {item.quantidade}</td>
+                                    <td>{item.pagamento}</td>
+                                    <td>{item.created_at}</td>
+                                    </tr>
+                        )
+                }
+
+
             </table>
 
 
