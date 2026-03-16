@@ -29,6 +29,17 @@ function Vendas() {
             <h1>Vendas</h1>
             <hr />
 
+            <table class="table">
+                <tr>
+                    <td>Nome</td>
+                    <td>Produtp</td>
+                    <td>Quantidade</td>
+                    <td>Forma de pagamento</td>
+                    <td>Data</td>
+                </tr>
+
+            </table>
+
 
 
 
