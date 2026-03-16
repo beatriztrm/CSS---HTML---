@@ -1,4 +1,5 @@
-import { useState } from "react";
+'use client'
+import { useEffect, useState } from "react";
 import supabase from "../conexao/supabase";
 supabase
 
@@ -17,6 +18,9 @@ function Vendas() {
         alteraListaVendas(data)
     }
 
+        useEffect(()=>{
+            buscaTodos()
+        },[])
 
 
     return (
