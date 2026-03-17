@@ -12,15 +12,44 @@ function Vendas() {
     async function buscaTodos() {
         const { data, error } = await supabase
             .from('vendas')
-            .select()
-        console.log(error)
+            .select(`
+                *,
+                id_usuario(*)
+                id_livro(*)
+                `)
+                
+                console.log(data)
+                
+                    
+                
 
         alteraListaVendas(data)
     }
 
-        useEffect(()=>{
-            buscaTodos()
-        },[])
+    function formataData(data){
+        let data_Formatada = new Date(data)
+        data_Formatada = data_Formatada.toLocaleDateString()
+        return data_Formatada
+
+    }
+
+    function formataHoras(horas){
+        let horas_Formatadas = new Date(horas)
+        horas_Formatadas = horas_Formatadas.toLocaleDateString()
+        return horas_Formatadas
+
+    }
+
+
+
+    useEffect(() => {
+        buscaTodos()
+    }, [])
+
+
+
+
+
 
 
     return (
@@ -32,24 +61,24 @@ function Vendas() {
             <table class="table">
                 <tr>
                     <td>Nome</td>
-                    <td>Produtp</td>
+                    <td>Livro</td>
                     <td>Quantidade</td>
                     <td>Forma de pagamento</td>
                     <td>Data</td>
                 </tr>
 
                 {
-                    listaVendas.length == 0 ?   
+                    listaVendas.length == 0 ?
                         <p>Carregando..</p>
-                    :    
+                        :
                         listaVendas.map(
                             item => <tr>
-                                    <td> {item.id_usuario} </td>
-                                    <td> {item.id_livro} </td>
-                                    <td> {item.quantidade}</td>
-                                    <td>{item.pagamento}</td>
-                                    <td>{item.created_at}</td>
-                                    </tr>
+                                <td> {item.id_usuario.nome} </td>
+                                <td> {item.id_livro.nome} </td>
+                                <td> {item.quantidade}</td>
+                                <td>{item.pagamento}</td>
+                                <td>{item.created_at}</td>
+                            </tr>
                         )
                 }
 
