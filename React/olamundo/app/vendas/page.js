@@ -180,7 +180,7 @@ function Vendas() {
                         <p>Carregando..</p>
                         :
                         listaVendas.map(
-                            (item, index) => <tr>
+                            (item, index) => <tr onClick={()=>location.href="/vendas/"+item.id}>
                                 <td>{index}</td>
                                 <td> {item.id_usuario.nome} </td>
                                 <td> {item.id_livro.titulo} </td>
