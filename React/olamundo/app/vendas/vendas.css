@@ -1,0 +1,10 @@
+table tr {
+    transition: 0.1s;
+}
+
+
+table tr:hover{
+    background-color: rgb(18, 190, 133);
+    cursor: pointer;
+    
+}

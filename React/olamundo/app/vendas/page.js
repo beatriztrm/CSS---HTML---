@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import supabase from "../conexao/supabase";
+import "./vendas.css"
 supabase
 
 
@@ -131,7 +132,10 @@ function Vendas() {
 
             <form onSubmit={salvar}>
                 <p>Selecione o usuário</p>
+
                 <select onChange={e => alteraUsuario(e.target.value)}>
+                    <option>Selecione...</option>
+
                     {
                         listaUsuarios.map(
                             item => <option value={item.id}>{item.nome}</option>
@@ -141,6 +145,7 @@ function Vendas() {
                 <p>Selecione o Livro</p>
 
                 <select onChange={e => alteraLivro(e.target.value)}>
+                    <option>Selecione...</option>
                     {
                         listaLivros.map(
                             item => <option value={item.id}>{item.titulo}</option>
@@ -160,7 +165,7 @@ function Vendas() {
 
             <hr></hr>
 
-            <table class="table">
+            <table class="table table-hover">
                 <tr>
                     <td>#</td>
                     <td>Nome</td>
