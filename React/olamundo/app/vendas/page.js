@@ -12,6 +12,29 @@ function Vendas() {
     const [pagamento, alteraPagamento] = useState()
 
     const [listaVendas, alteraListaVendas] = useState([])
+    const [listaUsuarios, alteraListaUsuarios] = useState([])
+    const [listaLivros, alteraListaLivros] = useState([])
+
+
+    async function buscaLivros() {
+
+        const { data, error } = await supabase
+            .from('livros')
+            .select()
+        alteraListaLivros(data)
+    }
+
+
+
+    async function buscaUsuarios() {
+
+        const { data, error } = await supabase
+            .from('usuarios')
+            .select()
+        alteraListaUsuarios(data)
+    }
+
+
 
     async function buscaTodos() {
 
@@ -95,6 +118,8 @@ function Vendas() {
 
     useEffect(() => {
         buscaTodos()
+        buscaUsuarios()
+        buscaLivros()
     }, [])
 
 
