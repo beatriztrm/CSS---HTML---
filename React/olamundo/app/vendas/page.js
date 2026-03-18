@@ -133,8 +133,8 @@ function Vendas() {
                 <p>Selecione o usuário</p>
                 <select onChange={e => alteraUsuario(e.target.value)}>
                     {
-                        listaVendas.map(
-                            item => <option value={item.id_usuario.id}>{item.id_usuario.nome}</option>
+                        listaUsuarios.map(
+                            item => <option value={item.id}>{item.nome}</option>
                         )
                     }
                 </select>
@@ -142,8 +142,8 @@ function Vendas() {
 
                 <select onChange={e => alteraLivro(e.target.value)}>
                     {
-                        listaVendas.map(
-                            item => <option value={item.id_livro.id}>{item.id_livro.titulo}</option>
+                        listaLivros.map(
+                            item => <option value={item.id}>{item.titulo}</option>
                         )
                     }
                 </select>
