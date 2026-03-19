@@ -58,6 +58,16 @@ function Vendas() {
         alteraListaVendas(data)
     }
 
+    async function excluir(id){
+       const opcao = confirm("Tem certeza que deseja excluir?..")
+       if(opcao ==false){
+        return
+       }
+
+       const response = await supabase.from('vendas').delete().eq('id',id)
+
+    }
+
     function formataData(data) {
         let data_Formatada = new Date(data)
         data_Formatada = data_Formatada.toLocaleDateString()
@@ -173,6 +183,7 @@ function Vendas() {
                     <td>Quantidade</td>
                     <td>Forma de pagamento</td>
                     <td>Data</td>
+                    <td>Ações</td>
                 </tr>
 
                 {
@@ -180,13 +191,14 @@ function Vendas() {
                         <p>Carregando..</p>
                         :
                         listaVendas.map(
-                            (item, index) => <tr onClick={()=>location.href="/vendas/"+item.id}>
+                            (item, index) => <tr >
                                 <td>{index}</td>
                                 <td> {item.id_usuario.nome} </td>
                                 <td> {item.id_livro.titulo} </td>
                                 <td> {item.quantidade}</td>
                                 <td>{formataPagamento(item.pagamento)}</td>
                                 <td>{formataData(item.created_at)} às {formataHoras(item.created_at)}</td>
+                                <td><button onClick={()=>location.href="/vendas/"+item.id}>Ver</button><button onClick={()=>excluir(item.id)}>Excluir</button></td>
                             </tr>
                         )
                 }
