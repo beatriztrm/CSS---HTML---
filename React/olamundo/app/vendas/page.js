@@ -253,13 +253,15 @@ function Vendas() {
     return (
         <div>
 
+            <img class="whatsapp" src="https://cdn-icons-png.flaticon.com/512/1384/1384023.png"/>
+
             <h1>Vendas</h1>
             <hr />
 
             <form onSubmit={salvar}>
                 <p>Selecione o usuário</p>
 
-                <select onChange={e => alteraUsuario(e.target.value)}>
+                <select disabled={editando} onChange={e => alteraUsuario(e.target.value)}>
                     <option>Selecione...</option>
 
                     {
@@ -270,7 +272,7 @@ function Vendas() {
                 </select>
                 <p>Selecione o Livro</p>
 
-                <select onChange={e => alteraLivro(e.target.value)}>
+                <select disabled={editando}  onChange={e => alteraLivro(e.target.value)}>
                     <option>Selecione...</option>
                     {
                         listaLivros.map(
@@ -281,7 +283,7 @@ function Vendas() {
 
                      
                 <p>Digite a quantidade</p>
-                <input value={quantidade}  onChange={e => alteraQuantidade(e.target.value)} />
+                <input  value={quantidade}  onChange={e => alteraQuantidade(e.target.value)} />
                 <p>Digite o pagamento</p>
                 <input  value={pagamento} onChange={e => alteraPagamento(e.target.value)} />
                 <p>Digite uma observação</p>
@@ -363,3 +365,5 @@ export default Vendas;
 //usar o value para editar
 //<button onClick={()=> alteraEditando(false)}>Cancelar</button> - para que o botão suma quando voce apertar cancelar
 //colocar o async apenas quando for enviar para o banco
+//disabled={false} - o campo select fica desbloqueado para edição
+// disabled={true} - campo fica bloqueado paraedição

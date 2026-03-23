@@ -8,3 +8,10 @@ table tr:hover{
     cursor: pointer;
     
 }
+.whatsapp{
+    width: 75px;
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+
+}
