@@ -83,6 +83,7 @@ function Vendas() {
     function editar(objeto){
 
         //colocar um altera para cada editar e add value ao lado do input
+        //colocar o operador ternario para se tornar automatico e aparecer o botão atualizar
 
         alteraEditando(true)
 
@@ -90,8 +91,17 @@ function Vendas() {
         alteraPagamento(objeto.pagamento)
         alteraObservacao(objeto.observacao)
 
+    
     }
 
+    function cancelaEdicao(){
+         alteraEditando(false)
+
+        alteraQuantidade("")
+        alteraPagamento("")
+        alteraObservacao("")
+
+    }
 
     function formataData(data) {
         let data_Formatada = new Date(data)
@@ -285,7 +295,7 @@ function Vendas() {
                     editando == true ?
                         <div>
                             <button>Atualizar</button>
-                            <button>Cancelar</button>
+                            <button onClick={()=> cancelaEdicao(false)}>Cancelar</button>
                         </div>
                     :
                         <button>Salvar</button>
@@ -351,3 +361,5 @@ function Vendas() {
 export default Vendas;
 
 //usar o value para editar
+//<button onClick={()=> alteraEditando(false)}>Cancelar</button> - para que o botão suma quando voce apertar cancelar
+//colocar o async apenas quando for enviar para o banco
