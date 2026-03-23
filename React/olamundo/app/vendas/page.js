@@ -11,10 +11,19 @@ function Vendas() {
     const [livro, alteraLivro] = useState()
     const [quantidade, alteraQuantidade] = useState()
     const [pagamento, alteraPagamento] = useState()
+    const [observacao, alteraObservacao] = useState()
 
     const [listaVendas, alteraListaVendas] = useState([])
     const [listaUsuarios, alteraListaUsuarios] = useState([])
     const [listaLivros, alteraListaLivros] = useState([])
+
+    const [inputpesquisaPagamento, alteraInputPesquisaPagamento] = useState()
+    const [inputpesquisaObservacao, alteraInputPesquisaObservacao] = useState()
+    const [inputPesquisaData, alteraInputPesquisaData] = useState()
+    const [inputpesquisaUsuario, alteraInputPesquisaUsuario] = useState()
+    const [inputpesquisaProduto, alteraInputPesquisaProduto] = useState()
+
+
 
 
     async function buscaLivros() {
@@ -58,13 +67,13 @@ function Vendas() {
         alteraListaVendas(data)
     }
 
-    async function excluir(id){
-       const opcao = confirm("Tem certeza que deseja excluir?..")
-       if(opcao ==false){
-        return
-       }
+    async function excluir(id) {
+        const opcao = confirm("Tem certeza que deseja excluir?..")
+        if (opcao == false) {
+            return
+        }
 
-       const response = await supabase.from('vendas').delete().eq('id',id)
+        const response = await supabase.from('vendas').delete().eq('id', id)
 
     }
 
@@ -111,18 +120,103 @@ function Vendas() {
     }
     async function salvar(e) {
         e.preventDefault()
-
+        //essas informações vão para o banco - colocar igual ao banco de dados
         const objeto = {
             id_usuario: usuario,
             id_livro: livro,
             quantidade: quantidade,
             pagamento: pagamento,
+            observacao: observacao,
         }
         console.log(objeto)
 
         const { error } = await supabase.from('vendas').insert(objeto)
         console.log(error)
     }
+
+    //para guarddar a pesquisa criar a const e colocar no eq - lá embaixo colocar "Altera"
+
+    //FUNÇÕES DE PESQUISA
+    async function pesquisaPagamento() {
+        const { data, error } = await supabase
+            .from('vendas')
+            .select('*,id_usuario(*),id_livro(*)')
+            .eq('pagamento', inputpesquisaPagamento)
+        alteraListaVendas(data)
+
+    }
+    async function pesquisaObservacao() {
+        const { data, error } = await supabase
+            .from('vendas')
+            .select('*,id_usuario(*),id_livro(*)')
+            .ilike('observacao', '%' + inputpesquisaObservacao + '%') //colocar % para pesquisar palavras parecidas
+        alteraListaVendas(data)
+
+    }
+    async function pesquisaData() {
+        const { data, error } = await supabase
+            .from('vendas')
+            .select('*,id_usuario(*),id_livro(*)')
+            .gt('created_at', inputPesquisaData + " 00:00:00+00")
+            .lt('created_at', inputPesquisaData + " 23:59:00+00")
+
+        alteraListaVendas(data)
+
+
+
+
+    }
+    async function pesquisaUsuario() {
+
+
+        const { data, error } = await supabase
+            .from('vendas')
+            .select('*,id_usuario(*),id_livro(*)')
+            .eq('Usuario', inputpesquisaUsuario)
+        alteraListaVendas(data)
+
+
+    }
+    async function pesquisarProduto() {
+
+        const { data, error } = await supabase
+            .from('vendas')
+            .select('*,id_usuario(*),id_livro(*)')
+            .eq('Produto', inputpesquisaProduto)
+        alteraListaVendas(data)
+
+
+
+    }
+    async function pesquisaVenda() {
+
+
+        const { data, error } = await supabase
+            .from('vendas')
+            .select('*,id_usuario(*),id_livro(*)')
+            .order('quantidade', { ascending: false }) //para colocar em ordem a partir do mais vendido
+            .limit(1) //colocar para limiter a quantidade mostrada -- por ex. o item mais vendido
+        alteraListaVendas(data)
+
+
+
+    }
+    async function pesquisaVendaHoje() {
+       const { data, error } = await supabase
+            .from('vendas')
+            .select('*,id_usuario(*),id_livro(*)')
+            .gt('created_at', new Date().toISOString().split("T")[0] +" 00:00:00+00")
+            .lt('created_at', new Date().toISOString().split("T")[0] +" 23:5:00+00")
+
+        alteraListaVendas(data)
+
+
+
+    }
+
+
+
+
 
 
 
@@ -167,13 +261,26 @@ function Vendas() {
                 <input onChange={e => alteraQuantidade(e.target.value)} />
                 <p>Digite o pagamento</p>
                 <input onChange={e => alteraPagamento(e.target.value)} />
+                <p>Digite uma observação</p>
+                <input onChange={e => alteraObservacao(e.target.value)} />
                 <br></br>
                 <br></br>
                 <button>Salvar</button>
 
             </form>
 
-            <hr></hr>
+            <h2>Filtros</h2>
+
+
+            <p>Pesquisar o pagamento<input onChange={e => alteraInputPesquisaPagamento(e.target.value)} /> <button onClick={pesquisaPagamento}>Pesquisar</button></p>
+            <p>Pesquisar observação<input onChange={e => alteraInputPesquisaObservacao(e.target.value)} /> <button onClick={pesquisaObservacao}>Pesquisar</button></p>
+            <p>Pesquisar a data <input onChange={e => alteraInputPesquisaData(e.target.value)} type="date" /> <button onClick={pesquisaData}>Pesquisar</button></p>
+            <p>Pesquisar pelo ID do usuario<input onChange={e => alteraInputPesquisaUsuario(e.target.value)} /> <button onClick={pesquisaUsuario}>Pesquisar</button></p>
+            <p>Pesquisar pelo ID do produto<input onChange={e => alteraInputPesquisaProduto(e.target.value)} /> <button onClick={pesquisarProduto}>Pesquisar</button></p>
+            <p>Filtrar por maiores vendas <button onClick={pesquisaVenda}>Pesquisar</button></p>
+            <p>Ver vendas de hoje <button onClick={pesquisaVendaHoje}>Pesquisar</button></p>
+
+
 
             <table class="table table-hover">
                 <tr>
@@ -182,8 +289,10 @@ function Vendas() {
                     <td>Livro</td>
                     <td>Quantidade</td>
                     <td>Forma de pagamento</td>
+                    <td>observação</td>
                     <td>Data</td>
                     <td>Ações</td>
+
                 </tr>
 
                 {
@@ -197,8 +306,9 @@ function Vendas() {
                                 <td> {item.id_livro.titulo} </td>
                                 <td> {item.quantidade}</td>
                                 <td>{formataPagamento(item.pagamento)}</td>
+                                <td>{item.observacao}</td>
                                 <td>{formataData(item.created_at)} às {formataHoras(item.created_at)}</td>
-                                <td><button onClick={()=>location.href="/vendas/"+item.id}>Ver</button><button onClick={()=>excluir(item.id)}>Excluir</button></td>
+                                <td><button onClick={() => location.href = "/vendas/" + item.id}>Ver</button><button onClick={() => excluir(item.id)}>Excluir</button></td>
                             </tr>
                         )
                 }
