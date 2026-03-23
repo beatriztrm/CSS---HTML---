@@ -13,6 +13,9 @@ function Vendas() {
     const [pagamento, alteraPagamento] = useState()
     const [observacao, alteraObservacao] = useState()
 
+
+    const [editando, alteraEditando] = useState(false)
+
     const [listaVendas, alteraListaVendas] = useState([])
     const [listaUsuarios, alteraListaUsuarios] = useState([])
     const [listaLivros, alteraListaLivros] = useState([])
@@ -80,6 +83,8 @@ function Vendas() {
     function editar(objeto){
 
         //colocar um altera para cada editar e add value ao lado do input
+
+        alteraEditando(true)
 
         alteraQuantidade(objeto.quantidade)
         alteraPagamento(objeto.pagamento)
@@ -273,9 +278,21 @@ function Vendas() {
                 <input value={observacao} onChange={e => alteraObservacao(e.target.value)} />
                 <br></br>
                 <br></br>
-                <button>Salvar</button>
 
+                
+
+                {
+                    editando == true ?
+                        <div>
+                            <button>Atualizar</button>
+                            <button>Cancelar</button>
+                        </div>
+                    :
+                        <button>Salvar</button>
+                }
+                
             </form>
+            
 
             <h2>Filtros</h2>
 
