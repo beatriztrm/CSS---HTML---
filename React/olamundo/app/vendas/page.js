@@ -77,6 +77,17 @@ function Vendas() {
 
     }
 
+    function editar(objeto){
+
+        //colocar um altera para cada editar e add value ao lado do input
+
+        alteraQuantidade(objeto.quantidade)
+        alteraPagamento(objeto.pagamento)
+        alteraObservacao(objeto.observacao)
+
+    }
+
+
     function formataData(data) {
         let data_Formatada = new Date(data)
         data_Formatada = data_Formatada.toLocaleDateString()
@@ -132,6 +143,8 @@ function Vendas() {
 
         const { error } = await supabase.from('vendas').insert(objeto)
         console.log(error)
+
+        buscaTodos()
     }
 
     //para guarddar a pesquisa criar a const e colocar no eq - lá embaixo colocar "Altera"
@@ -215,12 +228,6 @@ function Vendas() {
     }
 
 
-
-
-
-
-
-
     useEffect(() => {
         buscaTodos()
         buscaUsuarios()
@@ -257,12 +264,13 @@ function Vendas() {
                     }
                 </select>
 
+                     
                 <p>Digite a quantidade</p>
-                <input onChange={e => alteraQuantidade(e.target.value)} />
+                <input value={quantidade}  onChange={e => alteraQuantidade(e.target.value)} />
                 <p>Digite o pagamento</p>
-                <input onChange={e => alteraPagamento(e.target.value)} />
+                <input  value={pagamento} onChange={e => alteraPagamento(e.target.value)} />
                 <p>Digite uma observação</p>
-                <input onChange={e => alteraObservacao(e.target.value)} />
+                <input value={observacao} onChange={e => alteraObservacao(e.target.value)} />
                 <br></br>
                 <br></br>
                 <button>Salvar</button>
@@ -308,7 +316,7 @@ function Vendas() {
                                 <td>{formataPagamento(item.pagamento)}</td>
                                 <td>{item.observacao}</td>
                                 <td>{formataData(item.created_at)} às {formataHoras(item.created_at)}</td>
-                                <td><button onClick={() => location.href = "/vendas/" + item.id}>Ver</button><button onClick={() => excluir(item.id)}>Excluir</button></td>
+                                <td><button onClick={() => location.href = "/vendas/" + item.id}>Ver</button><button onClick={() => excluir(item)}>Excluir</button><button onClick={() => editar(item)}>Editar</button></td>
                             </tr>
                         )
                 }
@@ -324,3 +332,5 @@ function Vendas() {
 }
 
 export default Vendas;
+
+//usar o value para editar
