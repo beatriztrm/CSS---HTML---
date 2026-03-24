@@ -14,7 +14,7 @@ function Vendas() {
     const [observacao, alteraObservacao] = useState()
 
 
-    const [editando, alteraEditando] = useState(false)
+    const [editando, alteraEditando] = useState(null)
 
     const [listaVendas, alteraListaVendas] = useState([])
     const [listaUsuarios, alteraListaUsuarios] = useState([])
@@ -80,26 +80,50 @@ function Vendas() {
 
     }
 
-    function editar(objeto){
+    function editar(objeto) {
 
         //colocar um altera para cada editar e add value ao lado do input
         //colocar o operador ternario para se tornar automatico e aparecer o botão atualizar
+        //trocar o true para quando for editar e colocar objeto.id
 
-        alteraEditando(true)
+        alteraEditando(objeto.id)
 
         alteraQuantidade(objeto.quantidade)
         alteraPagamento(objeto.pagamento)
         alteraObservacao(objeto.observacao)
 
-    
+
     }
 
-    function cancelaEdicao(){
-         alteraEditando(false)
+    function cancelaEdicao() {
+        alteraEditando(null)
 
         alteraQuantidade("")
         alteraPagamento("")
         alteraObservacao("")
+
+    }
+
+    async function atualizar() {
+
+        const objeto = {
+            quantidade: quantidade,
+            pagamento: pagamento,
+            observacao: observacao,
+        }
+
+        const { error } = await supabase
+            .from('vendas')
+            .update(objeto)
+            .eq('id', editando)
+
+        if (error == null) {
+            alert("Atualização realizada com sucesso!")
+            cancelaEdicao() //para limpar o formulario depois de atualizar, colocar depois do alert para ficar de forma automatica 
+            buscaTodos() //colocar para ver a atualização na tabela
+        } else {
+            alert("Dados inválidos! Verifique os campos e tente novamente...")
+        }
 
     }
 
@@ -230,11 +254,11 @@ function Vendas() {
 
     }
     async function pesquisaVendaHoje() {
-       const { data, error } = await supabase
+        const { data, error } = await supabase
             .from('vendas')
             .select('*,id_usuario(*),id_livro(*)')
-            .gt('created_at', new Date().toISOString().split("T")[0] +" 00:00:00+00")
-            .lt('created_at', new Date().toISOString().split("T")[0] +" 23:5:00+00")
+            .gt('created_at', new Date().toISOString().split("T")[0] + " 00:00:00+00")
+            .lt('created_at', new Date().toISOString().split("T")[0] + " 23:5:00+00")
 
         alteraListaVendas(data)
 
@@ -253,7 +277,10 @@ function Vendas() {
     return (
         <div>
 
-            <img class="whatsapp" src="https://cdn-icons-png.flaticon.com/512/1384/1384023.png"/>
+            <a href="https://api.whatsapp.com/?phone=5516997441251&text=Olá, vim pelo site e gostaria de saber sobre os livros">
+
+                <img class="whatsapp" src="https://cdn-icons-png.flaticon.com/512/1384/1384023.png" />
+            </a>
 
             <h1>Vendas</h1>
             <hr />
@@ -261,7 +288,7 @@ function Vendas() {
             <form onSubmit={salvar}>
                 <p>Selecione o usuário</p>
 
-                <select disabled={editando} onChange={e => alteraUsuario(e.target.value)}>
+                <select disabled={editando != null} onChange={e => alteraUsuario(e.target.value)}>
                     <option>Selecione...</option>
 
                     {
@@ -272,7 +299,7 @@ function Vendas() {
                 </select>
                 <p>Selecione o Livro</p>
 
-                <select disabled={editando}  onChange={e => alteraLivro(e.target.value)}>
+                <select disabled={editando != null} onChange={e => alteraLivro(e.target.value)}>
                     <option>Selecione...</option>
                     {
                         listaLivros.map(
@@ -281,30 +308,30 @@ function Vendas() {
                     }
                 </select>
 
-                     
+
                 <p>Digite a quantidade</p>
-                <input  value={quantidade}  onChange={e => alteraQuantidade(e.target.value)} />
+                <input value={quantidade} onChange={e => alteraQuantidade(e.target.value)} />
                 <p>Digite o pagamento</p>
-                <input  value={pagamento} onChange={e => alteraPagamento(e.target.value)} />
+                <input value={pagamento} onChange={e => alteraPagamento(e.target.value)} />
                 <p>Digite uma observação</p>
                 <input value={observacao} onChange={e => alteraObservacao(e.target.value)} />
                 <br></br>
                 <br></br>
 
-                
+
 
                 {
-                    editando == true ?
+                    editando != null ?
                         <div>
-                            <button>Atualizar</button>
-                            <button onClick={()=> cancelaEdicao(false)}>Cancelar</button>
+                            <button onClick={atualizar}>Atualizar</button>
+                            <button onClick={() => cancelaEdicao(false)}>Cancelar</button>
                         </div>
-                    :
+                        :
                         <button>Salvar</button>
                 }
-                
+
             </form>
-            
+
 
             <h2>Filtros</h2>
 
@@ -367,3 +394,5 @@ export default Vendas;
 //colocar o async apenas quando for enviar para o banco
 //disabled={false} - o campo select fica desbloqueado para edição
 // disabled={true} - campo fica bloqueado paraedição
+//<a href="https://api.whatsapp.com/?phone=5516997441251&text=Olá, vim pelo site e gostaria de saber sobre os livros"> img class="whatsapp" src="https://cdn-icons-png.flaticon.com/512/1384/1384023.png" />
+//usar para conectar o whatsapp com o site

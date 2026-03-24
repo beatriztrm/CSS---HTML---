@@ -10,7 +10,7 @@ table tr:hover{
 }
 .whatsapp{
     width: 75px;
-    position: absolute;
+    position: fixed;
     right: 50px;
     bottom: 50px;
 
